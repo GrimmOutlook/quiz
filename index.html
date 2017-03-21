@@ -2,25 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JavaScript Quiz</title>
+  <title>Steelers Quiz</title>
   <link rel="stylesheet" href="stylesheets/styles.css">
 </head>
 <body>
-  <h1>JavaScript Quiz</h1>
+  <h1>Pittsburgh Steelers Super Bowl Quiz</h1>
 
   <div id="question-counter">
     <p>You are on question <span><b>currentQuestion</b></span> of <span><b>totalQuestion</b></span>.</p>
   </div>
 
     <form id="js-quiz-form">
-      <label for="quiz-answer-entry">Question: Put question here</label>
-      <input type="text" name="quiz-answer-entry" id="quiz-answer-entry" placeholder="Type answer here">
+      <label for="quiz-answer-entry">Question: Put question here</label><br>
+        <input type="radio" name="quiz-answer-entry" id="quiz-answer-entry">
+      <label for="user-guess">Use jQuery to fill in multiple choices here</label><br>
+        <input type="radio" name="quiz-answer-entry" id="quiz-answer-entry">
+      <label for="user-guess">Use jQuery to fill in multiple choices here</label><br>
+        <input type="radio" name="quiz-answer-entry" id="quiz-answer-entry">
+      <label for="user-guess">Use jQuery to fill in multiple choices here</label><br>
+        <input type="radio" name="quiz-answer-entry" id="quiz-answer-entry">
+      <label for="user-guess">Use jQuery to fill in multiple choices here</label><br>
+
       <button type="submit">Submit Answer</button>
     </form>
 
   <div id="current-score">
     <p>You answered <span><b>correctAnswerNumber</b></span> questions correctly.  Awesome!</p>
-    <p>You answered <span><b>incorrectAnswerNumber</b></span> questions correctly.  Get your head out of your ass!</p>
+    <p>You answered <span><b>incorrectAnswerNumber</b></span> questions incorrectly.  Get your head out of your ass!</p>
   </div>
 
   <script type="text/javascript" src="js/quiz.js"></script>
