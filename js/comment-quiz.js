@@ -42,21 +42,29 @@ var questionNow = function(state, quiz){
 };
 
 
-var guessComparison = function(state, quiz){
-  quizQuestion.answer === state.userGuess;
+var guessComparison = function(state){
+  state.quizQuestion.answer === state.userGuess;
 };
 
-// Render Fxns:
-// A fxn that displays the current question.
+// ------------- Render Fxns: ---------------
+// A fxn that displays the number of the current question.
 var questionNumber = function(state, element){
-  var itemsHTML = "<span>" + state.correctQuestion + "</span>";
+  var itemsHTML = "<span>" + state.currentQuestion + "</span>";
   element.html(itemsHTML);
+};
+
+var randomAllChoices = function(state){
+  var allChoices = [state.quizQuestion.answer].concat([state.quizQuestion.choices]);
+  var randomAllChoices = allChoices.sort(function(){
+    return .5 - Math.random();
+  });
+  return randomAllChoices;
 };
 
 // A fxn that displays questions, answer, & multiple choices, one at a time.
 var renderQuiz = function(state, element){
   var itemsHTML = "<h1>" + state.quizQuestion.question + "</h1>" +
-    "<h3>" + state.quizQuestion.answer + "</h3>" + state.quizQuestion.choices.map(function(choice){
+      randomAllChoices(state).map(function(choice){
         return "<h3>" + choice + "</h3>";
       });
   element.html(itemsHTML);
@@ -75,12 +83,42 @@ var renderQuestionCorrectness = function(state, element){
   element.html(itemsHTML);
 };
 
+var endQuiz = function(state, element){
+  if (state.currentQuestion <= totalQuestions){
+    //call fxn that starts next question
+  }
+  else {
+    var itemsHTML = "<div>" + "Quiz is finished, try again?" + "</div>";
+  }
+  element.html(itemsHTML);
+};
+
 
 // A fxn that takes each of the userGuess array items & compares them to the correct answers in var quiz.  If equal, mark as correct, if not, mark as incorrect.
 
 // A fxn that has a counter to keep track of what question is being asked.
 
 // A fxn that randomly displays the quiz question, along with displaying its 4 multiple choice guesses in a random order.  Once guess is made, the next question & multiple choices are displayed.
+
+// Fxn that calls all the other fxns.  Only one??
+
+// Have a 'Start' or 'Replay' button
+
+$('.start-quiz').submit(function(event){
+  event.preventDefault();
+  questionNumber(state, $('#question-counter'));
+  questionNow(state, quiz);
+  randomAllChoices(state);
+  renderQuiz(state);
+});
+
+$('.js-quiz-form').submit(function(event){
+  event.preventDefault();
+  userGuessTracker(state, $('.quiz-answer-entry').val());
+  renderQuestionCorrectness(state, $('.current-score'));
+  questionCounter(state);
+  endQuiz(state, $('.start-quiz'));
+});
 
 
 

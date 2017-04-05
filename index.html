@@ -3,34 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <title>Steelers Quiz</title>
+  <link rel="stylesheet" href="stylesheets/reset.css">
   <link rel="stylesheet" href="stylesheets/styles.css">
 </head>
 <body>
   <h1>Pittsburgh Steelers Super Bowl Quiz</h1>
 
-  <div id="question-counter">
-    <p>You are on question <span><b>currentQuestion</b></span> of <span><b>totalQuestion</b></span>.</p>
+  <div class="start-quiz">
+    <p>Click here to start this awesome quiz:</p>
+    <button type="submit">Start!</button>
   </div>
 
-    <form id="js-quiz-form">
-      <label for="quiz-answer-entry">Question: Put question here</label><br>
-        <input type="radio" name="quiz-answer-entry" id="quiz-answer-entry">
-      <label for="user-guess">Use jQuery to fill in multiple choices here</label><br>
-        <input type="radio" name="quiz-answer-entry" id="quiz-answer-entry">
-      <label for="user-guess">Use jQuery to fill in multiple choices here</label><br>
-        <input type="radio" name="quiz-answer-entry" id="quiz-answer-entry">
-      <label for="user-guess">Use jQuery to fill in multiple choices here</label><br>
-        <input type="radio" name="quiz-answer-entry" id="quiz-answer-entry">
-      <label for="user-guess">Use jQuery to fill in multiple choices here</label><br>
+  <div id="question-counter">
+    <p>You are on question <span><b>currentQuestion</b></span> of <span><b>5</b></span>.</p>
+  </div>
+
+    <form class="js-quiz-form">
+      <label for="quiz-question">Testing 1 2 3</label><br>
+        <input type="radio" name="quiz-answer-entry" class="quiz-answer-entry">
+      <label for="user-guess">Choice 1</label><br>
+        <input type="radio" name="quiz-answer-entry" class="quiz-answer-entry">
+      <label for="user-guess">Choice 2</label><br>
+        <input type="radio" name="quiz-answer-entry" class="quiz-answer-entry">
+      <label for="user-guess">Choice 3</label><br>
+        <input type="radio" name="quiz-answer-entry" class="quiz-answer-entry">
+      <label for="user-guess">Choice 4</label><br>
 
       <button type="submit">Submit Answer</button>
     </form>
 
   <div id="current-score">
-    <p>You answered <span><b>correctAnswerNumber</b></span> questions correctly.  Awesome!</p>
-    <p>You answered <span><b>incorrectAnswerNumber</b></span> questions incorrectly.  Get your head out of your ass!</p>
+    <p>You answered <span><b>correctCounter</b></span> questions correctly.  Awesome!</p>
+    <p>You answered <span><b>incorrectCounter</b></span> questions incorrectly.  Get your head out of your ass!</p>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/quiz.js"></script>
 </body>
 </html>

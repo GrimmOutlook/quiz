@@ -12,3 +12,7 @@ form {
   height: 25%;
   width: 33%;
 }
+
+.hide {
+  display: none;
+}
