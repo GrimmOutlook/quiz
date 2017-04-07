@@ -1,4 +1,4 @@
-import * as quiz from './quiz';
+// import * as quiz from './quiz';
 
 // import quiz from "./quiz";
 
@@ -111,6 +111,7 @@ $('.start-quiz').submit(function(event){
   event.preventDefault();
   questionNumber(state, $('#question-counter'));
   questionNow(state, quiz);
+  console.log(state.quizQuestion);
   randomAllChoices(state);
   renderQuiz(state);
 });
@@ -123,9 +124,9 @@ $('.start-quiz').submit(function(event){
 //   endQuiz(state, $('.start-quiz'));
 // });
 
+console.log(quiz[4].choices[2]);
 
-
-
+console.log(state.quizQuestion);
 
 
 
