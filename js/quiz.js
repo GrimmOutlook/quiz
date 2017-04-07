@@ -53,4 +53,6 @@ var quiz = [
 
 console.log(quiz[9].choice10_3);
 
-export default quiz;
+export { quiz };
+
+// export default quiz;

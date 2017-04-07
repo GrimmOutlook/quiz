@@ -1,20 +1,32 @@
-import quiz from "./quiz";
+import * as quiz from './quiz';
 
-// An array of objects of questions, answers, & 3 incorrect answers is assigned to var quiz.
+// import quiz from "./quiz";
 
-// An object, var guesses, is created with one key, userGuesses, and an empty array for a value.
+// An array of objects, each containing a questions, the correct answer, & an array of 3 incorrect choices is assigned to var quiz in the quiz.js file.
 
-// An empty array, correctGuesses, is created.
+// state object - contains all items that can possibly be updated as the user interacts with the quiz app.
 
 var state = {
+  currentQuestion: 1,
+  quizQuestion: {},
   userGuess: "",
   correctGuesses: 0,
-  incorrectGuesses: 0,
-  currentQuestion: 1,
-  quizQuestion: {}
+  incorrectGuesses: 0
 };
 
 var totalQuestions = 5;
+
+//  ---------------------- STATE MODIFICATION FXNS.  -------------------------------
+
+// A fxn that randomly selects an array index value betw 1 & 10 for the quiz object.  The state of the quizQuestion object is updated to the value of quiz.[-index value-].
+var questionNow = function(state, quiz){
+  state.quizQuestion = quiz[Math.floor(Math.random()*(10-1+1)) + 1];
+};
+
+// A fxn that stores the value of a user's guess (a string) into var userGuess.
+var userGuessTracker = function(state, guess){
+  state.userGuess = guess;
+};
 
 // A fxn that increments by 1 the current question number (var currentQuestion).
 var questionCounter = function(state){
@@ -31,28 +43,21 @@ var incorrectCounter = function(state){
   state.incorrectGuesses += 1;
 };
 
-// A fxn that stores the value of a user's guess (a string) into var userGuess.
-var userGuessTracker = function(state, guess){
-  state.userGuess = guess;
-};
-
-// A fxn that randomly selects an array index value betw 1 & 10 for the quiz object.  The state of the quizQuestion object is updated to the value of quiz.[-index value-].
-var questionNow = function(state, quiz){
-  state.quizQuestion = quiz[Math.floor(Math.random()*(10-1+1)) + 1];
-};
-
-
+// NEEDED?????????????
 var guessComparison = function(state){
   state.quizQuestion.answer === state.userGuess;
 };
 
-// ------------- Render Fxns: ---------------
+
+
+// -------------------------------- RENDER FXNS: ----------------------------------
 // A fxn that displays the number of the current question.
 var questionNumber = function(state, element){
   var itemsHTML = "<span>" + state.currentQuestion + "</span>";
   element.html(itemsHTML);
 };
 
+// A fxn that concats the answer & other 3 choices into 1 array.  Then sorts them into a random order.
 var randomAllChoices = function(state){
   var allChoices = [state.quizQuestion.answer].concat([state.quizQuestion.choices]);
   var randomAllChoices = allChoices.sort(function(){
@@ -61,7 +66,7 @@ var randomAllChoices = function(state){
   return randomAllChoices;
 };
 
-// A fxn that displays questions, answer, & multiple choices, one at a time.
+// A fxn that displays a question, the answer, & 3 other multiple choices.
 var renderQuiz = function(state, element){
   var itemsHTML = "<h1>" + state.quizQuestion.question + "</h1>" +
       randomAllChoices(state).map(function(choice){
@@ -70,9 +75,7 @@ var renderQuiz = function(state, element){
   element.html(itemsHTML);
 };
 
-// A fxn that displays the question number counter.
-// A fxn that displays the correct questions and incorrect questions.
-// One fxn with if...else statement?  I think so!
+// One fxn with if...else statement to update
 var renderQuestionCorrectness = function(state, element){
   if (state.quizQuestion.answer === state.userGuess){
     var itemsHTML = "<span>" + state.correctGuesses + "</span>";
@@ -85,7 +88,7 @@ var renderQuestionCorrectness = function(state, element){
 
 var endQuiz = function(state, element){
   if (state.currentQuestion <= totalQuestions){
-    //call fxn that starts next question
+    questionNow(quiz);
   }
   else {
     var itemsHTML = "<div>" + "Quiz is finished, try again?" + "</div>";
@@ -112,13 +115,13 @@ $('.start-quiz').submit(function(event){
   renderQuiz(state);
 });
 
-$('.js-quiz-form').submit(function(event){
-  event.preventDefault();
-  userGuessTracker(state, $('.quiz-answer-entry').val());
-  renderQuestionCorrectness(state, $('.current-score'));
-  questionCounter(state);
-  endQuiz(state, $('.start-quiz'));
-});
+// $('.js-quiz-form').submit(function(event){
+//   event.preventDefault();
+//   userGuessTracker(state, $('.quiz-answer-entry').val());
+//   renderQuestionCorrectness(state, $('.current-score'));
+//   questionCounter(state);
+//   endQuiz(state, $('.start-quiz'));
+// });
 
 
 
