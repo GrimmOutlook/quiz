@@ -86,6 +86,7 @@ var renderQuestionCorrectness = function(state, element){
   element.html(itemsHTML);
 };
 
+// A fxn that takes each of the userGuess array items & compares them to the correct answers in var quiz.  If equal, mark as correct, if not, mark as incorrect.
 var endQuiz = function(state, element){
   if (state.currentQuestion <= totalQuestions){
     questionNow(quiz);
@@ -96,17 +97,12 @@ var endQuiz = function(state, element){
   element.html(itemsHTML);
 };
 
+// Have a 'Start' or 'Replay' button.  Need this?
 
-// A fxn that takes each of the userGuess array items & compares them to the correct answers in var quiz.  If equal, mark as correct, if not, mark as incorrect.
 
-// A fxn that has a counter to keep track of what question is being asked.
+// -------------------------------- JQUERY FXNS: ----------------------------------
 
-// A fxn that randomly displays the quiz question, along with displaying its 4 multiple choice guesses in a random order.  Once guess is made, the next question & multiple choices are displayed.
-
-// Fxn that calls all the other fxns.  Only one??
-
-// Have a 'Start' or 'Replay' button
-
+// jQuery fxn that calls all fxns that will display the quiz questions & choices upon clicking the 'Start!' button.
 $('.start-quiz').click(function(){
   event.preventDefault();
   questionNumber(state, $('#question-counter > span:first-child'));
@@ -116,7 +112,8 @@ $('.start-quiz').click(function(){
   renderQuiz(state, $('.js-quiz-form > label'));
 });
 
-$('.js-quiz-form').submit(function(event){
+// Once 'Submit Answer!' button is clicked, jQuery fxn that calls all fxns that will get the user's guess and compare it to the correct answer, then update either the correct or incorrect count by one.
+$('.js-quiz-form').click(function(event){
   event.preventDefault();
   userGuessTracker(state, $('.quiz-answer-entry').val());
   renderQuestionCorrectness(state, $('.current-score > p.span'));
