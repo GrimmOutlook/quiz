@@ -53,7 +53,7 @@ var guessComparison = function(state){
 // -------------------------------- RENDER FXNS: ----------------------------------
 // A fxn that displays the number of the current question.
 var questionNumber = function(state, element){
-  var itemsHTML = "<span>" + state.currentQuestion + "</span>";
+  var itemsHTML = "<b>" + state.currentQuestion + "</b>";
   element.html(itemsHTML);
 };
 
@@ -78,10 +78,10 @@ var renderQuiz = function(state, element){
 // One fxn with if...else statement to update
 var renderQuestionCorrectness = function(state, element){
   if (state.quizQuestion.answer === state.userGuess){
-    var itemsHTML = "<span>" + state.correctGuesses + "</span>";
+    var itemsHTML = "<b>" + state.correctGuesses + "</b>";
   }
   else {
-    var itemsHTML = "<span>" + state.incorrectGuesses + "</span>";
+    var itemsHTML = "<b>" + state.incorrectGuesses + "</b>";
   }
   element.html(itemsHTML);
 };
@@ -107,24 +107,24 @@ var endQuiz = function(state, element){
 
 // Have a 'Start' or 'Replay' button
 
-$('.start-quiz').submit(function(event){
+$('.start-quiz').click(function(){
   event.preventDefault();
-  questionNumber(state, $('#question-counter'));
+  questionNumber(state, $('#question-counter > span:first-child'));
   questionNow(state, quiz);
   console.log(state.quizQuestion);
   randomAllChoices(state);
-  renderQuiz(state);
+  renderQuiz(state, $('.js-quiz-form > label'));
 });
 
-// $('.js-quiz-form').submit(function(event){
-//   event.preventDefault();
-//   userGuessTracker(state, $('.quiz-answer-entry').val());
-//   renderQuestionCorrectness(state, $('.current-score'));
-//   questionCounter(state);
-//   endQuiz(state, $('.start-quiz'));
-// });
+$('.js-quiz-form').submit(function(event){
+  event.preventDefault();
+  userGuessTracker(state, $('.quiz-answer-entry').val());
+  renderQuestionCorrectness(state, $('.current-score > p.span'));
+  questionCounter(state);
+  endQuiz(state, $('.start-quiz'));
+});
 
-console.log(quiz[4].choices[2]);
+// console.log(quiz[4].choices[2]);
 
 console.log(state.quizQuestion);
 
