@@ -59,19 +59,24 @@ var questionNumber = function(state, element){
 
 // A fxn that concats the answer & other 3 choices into 1 array.  Then sorts them into a random order.
 var randomAllChoices = function(state){
-  var allChoices = [state.quizQuestion.answer].concat([state.quizQuestion.choices]);
-  var randomAllChoices = allChoices.sort(function(){
-    return .5 - Math.random();
-  });
-  return randomAllChoices;
+  state.quizQuestion.choices.push(state.quizQuestion.answer);
+  // console.log(state.quizQuestion.choices);
+  // state.quizQuestion.choices.sort(function(){
+  //   return .5 - Math.random();
+  // });
+  console.log(state.quizQuestion.choices);
+  return state.quizQuestion.choices;
 };
 
 // A fxn that displays a question, the answer, & 3 other multiple choices.
 var renderQuiz = function(state, element){
-  var itemsHTML = "<h1>" + state.quizQuestion.question + "</h1>" +
+  var itemsHTML = "<h1>" + state.quizQuestion.question + "</h1><br>" +
       randomAllChoices(state).map(function(choice){
-        return "<h3>" + choice + "</h3>";
+        return '<label for="user-guess">' + choice +'</label><br><input type="radio" name="quiz-answer-entry" class="quiz-answer-entry"><br>';
       });
+
+// console.log(itemsHTML);
+
   element.html(itemsHTML);
 };
 
@@ -103,13 +108,15 @@ var endQuiz = function(state, element){
 // -------------------------------- JQUERY FXNS: ----------------------------------
 
 // jQuery fxn that calls all fxns that will display the quiz questions & choices upon clicking the 'Start!' button.
-$('.start-quiz').click(function(){
-  event.preventDefault();
-  questionNumber(state, $('#question-counter > span:first-child'));
-  questionNow(state, quiz);
-  console.log(state.quizQuestion);
-  randomAllChoices(state);
-  renderQuiz(state, $('.js-quiz-form > label'));
+$(function(){
+  $('.start-quiz').click(function(){
+    event.preventDefault();
+    questionNumber(state, $('#question-counter > span:first-child'));
+    questionNow(state, quiz);
+    // console.log(state.quizQuestion);
+    randomAllChoices(state);
+    renderQuiz(state, $('.js-quiz-form'));
+  });
 });
 
 // Once 'Submit Answer!' button is clicked, jQuery fxn that calls all fxns that will get the user's guess and compare it to the correct answer, then update either the correct or incorrect count by one.
@@ -123,7 +130,7 @@ $('.js-quiz-form').click(function(event){
 
 // console.log(quiz[4].choices[2]);
 
-console.log(state.quizQuestion);
+// console.log(state.quizQuestion);
 
 
 
