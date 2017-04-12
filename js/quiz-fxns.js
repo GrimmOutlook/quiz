@@ -60,10 +60,9 @@ var questionNumber = function(state, element){
 // A fxn that concats the answer & other 3 choices into 1 array.  Then sorts them into a random order.
 var randomAllChoices = function(state){
   state.quizQuestion.choices.push(state.quizQuestion.answer);
-  // console.log(state.quizQuestion.choices);
-  // state.quizQuestion.choices.sort(function(){
-  //   return .5 - Math.random();
-  // });
+    state.quizQuestion.choices.sort(function(){
+      return .5 - Math.random();
+    });
   console.log(state.quizQuestion.choices);
   return state.quizQuestion.choices;
 };
@@ -71,8 +70,8 @@ var randomAllChoices = function(state){
 // A fxn that displays a question, the answer, & 3 other multiple choices.
 var renderQuiz = function(state, element){
   var itemsHTML = "<h1>" + state.quizQuestion.question + "</h1><br>" +
-      randomAllChoices(state).map(function(choice){
-        return '<label for="user-guess">' + choice +'</label><br><input type="radio" name="quiz-answer-entry" class="quiz-answer-entry"><br>';
+      state.quizQuestion.choices.map(function(choice){
+        return '<li><label for="user-guess">' + choice +'</label><br><input type="radio" name="quiz-answer-entry" class="quiz-answer-entry"></li><br>';
       });
 
 // console.log(itemsHTML);
@@ -115,7 +114,7 @@ $(function(){
     questionNow(state, quiz);
     // console.log(state.quizQuestion);
     randomAllChoices(state);
-    renderQuiz(state, $('.js-quiz-form'));
+    renderQuiz(state, $('.quiz-choices'));
   });
 });
 
