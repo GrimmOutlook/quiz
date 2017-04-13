@@ -71,7 +71,7 @@ var randomAllChoices = function(state){
 var renderQuiz = function(state, element){
   var itemsHTML = "<h1>" + state.quizQuestion.question + "</h1><br>" +
       state.quizQuestion.choices.map(function(choice){
-        return '<li><label for="user-guess">' + choice +'</label><br><input type="radio" name="quiz-answer-entry" class="quiz-answer-entry"></li><br>';
+        return '<li><label for="user-guess">' + choice +'</label><br><input type="radio" name="quiz-answer-entry" class="quiz-answer-entry" value="' + choice + '"></li><br>';
       });
 
 // console.log(itemsHTML);
@@ -112,7 +112,6 @@ $(function(){
     event.preventDefault();
     questionNumber(state, $('#question-counter > span:first-child'));
     questionNow(state, quiz);
-    // console.log(state.quizQuestion);
     randomAllChoices(state);
     renderQuiz(state, $('.quiz-choices'));
   });
