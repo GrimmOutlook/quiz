@@ -36,11 +36,13 @@ var questionCounter = function(state){
 // A fxn that increments by 1 the number of correctly answered questions (var correctGuesses).
 var correctCounter = function(state){
   state.correctGuesses += 1;
+  return state.correctGuesses;
 };
 
 // A fxn that increments by 1 the number of correctly answered questions (var incorrectGuesses).
 var incorrectCounter = function(state){
   state.incorrectGuesses += 1;
+  return state.incorrectGuesses;
 };
 
 // NEEDED?????????????
@@ -63,7 +65,7 @@ var randomAllChoices = function(state){
     state.quizQuestion.choices.sort(function(){
       return .5 - Math.random();
     });
-  console.log(state.quizQuestion.choices);
+  // console.log(state.quizQuestion.choices);
   return state.quizQuestion.choices;
 };
 
@@ -71,29 +73,29 @@ var randomAllChoices = function(state){
 var renderQuiz = function(state, element){
   var itemsHTML = "<h1>" + state.quizQuestion.question + "</h1><br>" +
       state.quizQuestion.choices.map(function(choice){
-        return '<li><label for="user-guess">' + choice +'</label><br><input type="radio" name="quiz-answer-entry" class="quiz-answer-entry" value="' + choice + '"></li><br>';
+        // console.log(choice);
+        return '<li><label for="user-guess">' + choice + '</label><br><input type="radio" name="quiz-answer-entry" class="quiz-answer-entry" value="' + choice + '"></li><br>';
       });
-
-// console.log(itemsHTML);
-
+      // console.log(itemsHTML);
   element.html(itemsHTML);
 };
 
 // One fxn with if...else statement to update
-var renderQuestionCorrectness = function(state, element){
+var renderQuestionCorrectness = function(state, correct, incorrect){
   if (state.quizQuestion.answer === state.userGuess){
-    var itemsHTML = "<b>" + state.correctGuesses + "</b>";
+    correctCounter(state);
   }
   else {
-    var itemsHTML = "<b>" + state.incorrectGuesses + "</b>";
+    incorrectCounter(state);
   }
-  element.html(itemsHTML);
+  correct.html(state.correctGuesses);
+  incorrect.html(state.incorrectGuesses);
 };
 
 // A fxn that takes each of the userGuess array items & compares them to the correct answers in var quiz.  If equal, mark as correct, if not, mark as incorrect.
 var endQuiz = function(state, element){
   if (state.currentQuestion <= totalQuestions){
-    questionNow(quiz);
+    questionNow(state, quiz);
   }
   else {
     var itemsHTML = "<div>" + "Quiz is finished, try again?" + "</div>";
@@ -118,17 +120,19 @@ $(function(){
 });
 
 // Once 'Submit Answer!' button is clicked, jQuery fxn that calls all fxns that will get the user's guess and compare it to the correct answer, then update either the correct or incorrect count by one.
-$('.js-quiz-form').click(function(event){
+$('#js-quiz-form > button').click(function(event){
   event.preventDefault();
   userGuessTracker(state, $('.quiz-answer-entry').val());
-  renderQuestionCorrectness(state, $('.current-score > p.span'));
+  renderQuestionCorrectness(state, $('#correct-guess'), $('#incorrect-guess'));
   questionCounter(state);
   endQuiz(state, $('.start-quiz'));
+  questionNumber(state, $('#question-counter > span:first-child'));
+  // questionNow(state, quiz);
+  randomAllChoices(state);
+  renderQuiz(state, $('.quiz-choices'));
+
 });
 
-// console.log(quiz[4].choices[2]);
-
-// console.log(state.quizQuestion);
 
 
 
