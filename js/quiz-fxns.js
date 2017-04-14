@@ -73,10 +73,8 @@ var randomAllChoices = function(state){
 var renderQuiz = function(state, element){
   var itemsHTML = "<h1>" + state.quizQuestion.question + "</h1><br>" +
       state.quizQuestion.choices.map(function(choice){
-        // console.log(choice);
-        return '<li><label for="user-guess">' + choice + '</label><br><input type="radio" name="quiz-answer-entry" class="quiz-answer-entry" value="' + choice + '"></li><br>';
-      });
-      // console.log(itemsHTML);
+        return '<li><label for="user-guess">' + choice + '</label><input type="radio" name="quiz-answer-entry" class="quiz-answer-entry" value="' + choice + '"></li><br>';
+      }).join(" ");
   element.html(itemsHTML);
 };
 
