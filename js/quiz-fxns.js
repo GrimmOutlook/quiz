@@ -20,7 +20,7 @@ var totalQuestions = 5;
 
 // A fxn that randomly selects an array index value betw 1 & 10 for the quiz object.  The state of the quizQuestion object is updated to the value of quiz.[-index value-].
 var questionNow = function(state, quiz){
-  state.quizQuestion = quiz[Math.floor(Math.random()*(10-1+1)) + 1];
+  state.quizQuestion = quiz[Math.floor(Math.random()*(9-0)) + 0];
 };
 
 // A fxn that stores the value of a user's guess (a string) into var userGuess.
@@ -46,9 +46,9 @@ var incorrectCounter = function(state){
 };
 
 // NEEDED?????????????
-var guessComparison = function(state){
-  state.quizQuestion.answer === state.userGuess;
-};
+// var guessComparison = function(state){
+//   state.quizQuestion.answer === state.userGuess;
+// };
 
 
 
