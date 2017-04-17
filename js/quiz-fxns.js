@@ -61,12 +61,17 @@ var questionNumber = function(state, element){
 
 // A fxn that concats the answer & other 3 choices into 1 array.  Then sorts them into a random order.
 var randomAllChoices = function(state){
+  if (state.quizQuestion.choices.length === 3){
   state.quizQuestion.choices.push(state.quizQuestion.answer);
-    state.quizQuestion.choices.sort(function(){
-      return .5 - Math.random();
-    });
+    // state.quizQuestion.choices.sort(function(){
+    //   return .5 - Math.random();
+    // });
   // console.log(state.quizQuestion.choices);
   return state.quizQuestion.choices;
+}
+else {
+  return state.quizQuestion.choices;
+}
 };
 
 // A fxn that displays a question, the answer, & 3 other multiple choices.
@@ -97,6 +102,10 @@ var endQuiz = function(state, element){
   }
   else {
     var itemsHTML = "<div>" + "Quiz is finished, try again?" + "</div>";
+
+
+    $('#js-quiz-form').hide();
+      $('#question-counter').hide();
   }
   element.html(itemsHTML);
 };
@@ -120,7 +129,7 @@ $(function(){
 // Once 'Submit Answer!' button is clicked, jQuery fxn that calls all fxns that will get the user's guess and compare it to the correct answer, then update either the correct or incorrect count by one.
 $('#js-quiz-form > button').click(function(event){
   event.preventDefault();
-  userGuessTracker(state, $('.quiz-answer-entry').val());
+  userGuessTracker(state, $('input[name="quiz-answer-entry"]:checked').val());
   renderQuestionCorrectness(state, $('#correct-guess'), $('#incorrect-guess'));
   questionCounter(state);
   endQuiz(state, $('.start-quiz'));

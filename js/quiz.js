@@ -1,12 +1,12 @@
 var quiz = [
   {
     question: "How many Super Bowls have the Steelers won?",
-    answer: 6,
+    answer: "6",
     choices: [4,5,1]
   },
   {
     question: "How many Super Bowls have the Steelers played in?",
-    answer: 8,
+    answer: "8",
     choices: [4,5,10]
   },
   {
@@ -16,7 +16,7 @@ var quiz = [
   },
   {
     question: "How many times have the Steelers played the Dallas Cowboys in the Super Bowl?",
-    answer: 3,
+    answer: "3",
     choices: [0,2,1]
   },
   {
@@ -31,12 +31,12 @@ var quiz = [
   },
   {
     question: "How many TD passes did Ben Roethlisberger throw in Super Bowl XL?",
-    answer: 0,
+    answer: "0",
     choices: [5,2,1]
   },
   {
     question: "How many TD passes did WR Antwaan Randle-El throw in Super Bowl XL?",
-    answer: 1,
+    answer: "1",
     choices: [3,0,2]
   },
   {
