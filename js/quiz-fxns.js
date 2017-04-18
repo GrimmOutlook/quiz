@@ -63,9 +63,9 @@ var questionNumber = function(state, element){
 var randomAllChoices = function(state){
   if (state.quizQuestion.choices.length === 3){
   state.quizQuestion.choices.push(state.quizQuestion.answer);
-    // state.quizQuestion.choices.sort(function(){
-    //   return .5 - Math.random();
-    // });
+    state.quizQuestion.choices.sort(function(){
+      return .5 - Math.random();
+    });
   // console.log(state.quizQuestion.choices);
   return state.quizQuestion.choices;
 }
@@ -103,9 +103,8 @@ var endQuiz = function(state, element){
   else {
     var itemsHTML = "<div>" + "Quiz is finished, try again?" + "</div>";
 
-
     $('#js-quiz-form').hide();
-      $('#question-counter').hide();
+    $('#question-counter').hide();
   }
   element.html(itemsHTML);
 };
